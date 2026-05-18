@@ -31,7 +31,7 @@ public_users.post("/register", (req,res) => {
   return res.status(201).json({ message: "User registered successfully" });
 });
 
-// Get the book list available in the shop
+// Task 1: Get the complete list of books available in the shop using Axios.
 public_users.get('/', async function (req, res) {
   //Write your code here
   if (req.headers["x-internal-request"] === "true") {
@@ -42,13 +42,14 @@ public_users.get('/', async function (req, res) {
     const response = await axios.get(`${baseURL}/`, {
       headers: { "x-internal-request": "true" }
     });
+
     return res.status(200).json(response.data);
   } catch (error) {
     return handleAxiosError(res, error);
   }
 });
 
-// Get book details based on ISBN
+// Task 2: Get the details of a single book by its ISBN using Axios.
 public_users.get('/isbn/:isbn', async function (req, res) {
   //Write your code here
   const isbn = req.params.isbn;
@@ -67,13 +68,14 @@ public_users.get('/isbn/:isbn', async function (req, res) {
     const response = await axios.get(`${baseURL}/isbn/${isbn}`, {
       headers: { "x-internal-request": "true" }
     });
+
     return res.status(200).json(response.data);
   } catch (error) {
     return handleAxiosError(res, error);
   }
  });
   
-// Get book details based on author
+// Task 3: Get all books written by the requested author using Axios.
 public_users.get('/author/:author', async function (req, res) {
   //Write your code here
   const author = req.params.author.toLowerCase();
@@ -94,13 +96,14 @@ public_users.get('/author/:author', async function (req, res) {
     const response = await axios.get(`${baseURL}/author/${req.params.author}`, {
       headers: { "x-internal-request": "true" }
     });
+
     return res.status(200).json(response.data);
   } catch (error) {
     return handleAxiosError(res, error);
   }
 });
 
-// Get all books based on title
+// Task 4: Get all books that match the requested title using Axios.
 public_users.get('/title/:title', async function (req, res) {
   //Write your code here
   const title = req.params.title.toLowerCase();
@@ -121,13 +124,14 @@ public_users.get('/title/:title', async function (req, res) {
     const response = await axios.get(`${baseURL}/title/${req.params.title}`, {
       headers: { "x-internal-request": "true" }
     });
+
     return res.status(200).json(response.data);
   } catch (error) {
     return handleAxiosError(res, error);
   }
 });
 
-//  Get book review
+// Task 5: Get all reviews for the book that matches the given ISBN.
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
   const isbn = req.params.isbn;
